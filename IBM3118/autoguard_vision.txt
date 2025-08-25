@@ -1,0 +1,60 @@
+# AutoGuard Vision: Embedded Anti-Theft Vehicle Security System  
+
+## Descrição do Projeto  
+O **AutoGuard Vision** é um sistema embarcado de **visão computacional para segurança veicular**, projetado para detectar e inibir o uso não autorizado de automóveis.  
+Ele utiliza **reconhecimento facial on-device** e **prova de vida básica** para autenticar motoristas. Em casos de falha, gera alertas automáticos contendo **localização, foto e evidências** enviadas a contatos de emergência, garantindo maior privacidade, baixa latência e operação mesmo sem internet.  
+
+---
+
+## Requisitos do Projeto  
+
+### Funcionais  
+- Reconhecimento facial local de motoristas autorizados (sem dependência da nuvem).  
+- Prova de vida simples (piscada ou movimento de cabeça + checagem IR).  
+- Gatilho de autenticação ao ligar o veículo ou abrir a porta.  
+- Registro e envio de eventos não autorizados com:  
+  - Localização (GPS)  
+  - Foto do rosto detectado  
+  - Data e hora  
+  - Clipe curto quando houver rede  
+- Painel/app companion para:  
+  - Cadastro de motoristas autorizados  
+  - Cadastro de contatos de emergência  
+  - Visualização de eventos  
+- Sincronização dos eventos quando online.  
+
+### Não Funcionais  
+- Operação offline com baixa latência (on-device).  
+- Confiabilidade mínima de 85% no reconhecimento facial.  
+- Privacidade e segurança de dados (embeddings criptografados).  
+- Robustez do protótipo físico para instalação em veículos.  
+- Custo acessível para protótipo acadêmico.  
+- Documentação acadêmica (código, revisão de literatura, referências IEEE).  
+
+---
+
+## Especificações Técnicas  
+
+| Requisito | Especificação Técnica |
+|-----------|-----------------------|
+| Reconhecimento facial | Modelo leve (MobileFaceNet / InsightFace TFLite/ONNX/NCNN) executado on-device |
+| Prova de vida | Detecção de piscada/micro-movimento e análise básica de IR |
+| Gatilho de autenticação | Início na ignição ou abertura da porta |
+| Captura de imagem/vídeo | Câmera MIPI CSI ou USB 1080p com iluminador IR |
+| Localização | Módulo GNSS (GPS) via UART/USB |
+| Alertas | Envio via Telegram Bot, e-mail, SMS (Twilio) ou webhooks |
+| Base de dados | Embeddings locais criptografados (AES-GCM) |
+| Painel/app | FastAPI + frontend leve (web local) ou app Android companion |
+| Prototipagem física | Case 3D com ventilação; conversor buck 12 V para alimentação estável |
+| Conectividade | Módulo 4G/LTE USB ou hotspot do celular |
+| Segurança | TLS nas comunicações, 2FA no painel, assinatura/verificação de updates OTA |
+
+---
+
+## Tecnologias e Ferramentas  
+- **Hardware:** Raspberry Pi 4/5 ou NVIDIA Jetson Nano/Orin Nano; câmera CSI/USB 1080p com IR; módulo GPS; conversor buck 12 V.  
+- **Software:** Python, FastAPI, OpenCV, GStreamer, MobileFaceNet/InsightFace (TFLite/ONNX/NCNN), criptografia AES-GCM.  
+- **Conectividade:** 4G/LTE via USB ou Wi-Fi do celular, protocolos HTTP/MQTT para envio de dados.  
+- **Alertas:** Integração com Telegram Bot, e-mail, SMS (Twilio) ou webhooks.  
+- **Prototipagem:** Case 3D para câmera e eletrônicos, suporte ajustável, ventilação.  
+- **Documentação acadêmica:** Overleaf (IEEE), revisão de literatura, relatórios técnicos.  
