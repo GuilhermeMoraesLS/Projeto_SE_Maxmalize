@@ -10,7 +10,6 @@ Ele utiliza **reconhecimento facial on-device** e **prova de vida básica** para
 
 ### Funcionais  
 - Reconhecimento facial local de motoristas autorizados (sem dependência da nuvem).  
-- Prova de vida simples (piscada ou movimento de cabeça + checagem IR).  
 - Gatilho de autenticação ao ligar o veículo ou abrir a porta.  
 - Registro e envio de eventos não autorizados com:  
   - Localização (GPS)  
@@ -38,7 +37,6 @@ Ele utiliza **reconhecimento facial on-device** e **prova de vida básica** para
 | Requisito | Especificação Técnica |
 |-----------|-----------------------|
 | Reconhecimento facial | Modelo leve (MobileFaceNet / InsightFace TFLite/ONNX/NCNN) executado on-device |
-| Prova de vida | Detecção de piscada/micro-movimento e análise básica de IR |
 | Gatilho de autenticação | Início na ignição ou abertura da porta |
 | Captura de imagem/vídeo | Câmera MIPI CSI ou USB 1080p com iluminador IR |
 | Localização | Módulo GNSS (GPS) via UART/USB |
@@ -52,7 +50,7 @@ Ele utiliza **reconhecimento facial on-device** e **prova de vida básica** para
 ---
 
 ## Tecnologias e Ferramentas  
-- **Hardware:** Raspberry Pi 4/5 ou NVIDIA Jetson Nano/Orin Nano; câmera CSI/USB 1080p com IR; módulo GPS; conversor buck 12 V.  
+- **Hardware:** Raspberry Pi 4; câmera CSI/USB 1080p com IR; módulo GPS; conversor buck 12 V.  
 - **Software:** Python, FastAPI, OpenCV, GStreamer, MobileFaceNet/InsightFace (TFLite/ONNX/NCNN), criptografia AES-GCM.  
 - **Conectividade:** 4G/LTE via USB ou Wi-Fi do celular, protocolos HTTP/MQTT para envio de dados.  
 - **Alertas:** Integração com Telegram Bot, e-mail, SMS (Twilio) ou webhooks.  
