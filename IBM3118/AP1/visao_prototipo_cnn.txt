@@ -1,0 +1,16 @@
+# Progressos no Protótipo de Reconhecimento Facial
+Este protótipo inicial de reconhecimento facial, desenvolvido com a biblioteca face_recognition e redes neurais convolucionais (CNNs), marca a primeira fase do nosso projeto. O objetivo principal foi criar uma base sólida para a identificação de pessoas em imagens estáticas, estabelecendo a viabilidade técnica da abordagem.
+
+## Melhorias e Customizações Aplicadas
+O código original foi adaptado com customizações estratégicas para otimizar o desempenho e a usabilidade. Os principais esforços foram:
+
+- Otimização de Velocidade: Implementamos um sistema de redimensionamento automático de imagens. Antes de processar uma imagem, o código a reduz para uma escala menor (scale=0.25), o que acelera significativamente a detecção e o reconhecimento, sem perder a precisão ao retornar as coordenadas originais do rosto.
+
+- Estrutura Modular: O código foi dividido em funções claras e distintas. A função load_face_database() é responsável por carregar os encodings faciais, enquanto recognize_faces_in_image() lida com todo o processo de reconhecimento. Essa modularidade torna o código mais fácil de ler, modificar e expandir para futuras funcionalidades.
+
+- Gerenciamento de Dados Simplificado: Adicionamos uma rotina para criar e gerenciar um banco de dados de rostos conhecidos na pasta database. Basta arrastar e soltar as imagens de referência, e o script faz o resto, associando cada rosto ao nome do arquivo.
+
+- Resultados Claros e Visuais: O protótipo não apenas identifica os rostos, mas também gera um resultado visual. Ele desenha retângulos de detecção e rótulos com nomes diretamente na imagem, que é então salva como resultado.jpg. Isso facilita a visualização e a validação do desempenho do sistema.
+
+##Próximos Passos
+Com a base do reconhecimento em imagens estáticas consolidada, a próxima fase do projeto será focar na transição para o reconhecimento em tempo real dentro de um ambiente veicular. Nosso objetivo é adaptar o sistema para processar fluxos de vídeo ao vivo, garantindo que ele funcione de forma robusta e eficiente sob condições de iluminação e movimento do mundo real.
