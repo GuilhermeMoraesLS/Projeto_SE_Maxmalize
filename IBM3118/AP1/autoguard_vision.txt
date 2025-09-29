@@ -36,9 +36,9 @@ Ele utiliza **reconhecimento facial on-device** e **prova de vida básica** para
 
 | Requisito | Especificação Técnica |
 |-----------|-----------------------|
-| Reconhecimento facial | Modelo leve (MobileFaceNet / InsightFace TFLite/ONNX/NCNN) executado on-device |
+| Reconhecimento facial | CNN via face_recognition library (dlib ResNet-34) gerando embeddings de 128 dimensões |
 | Gatilho de autenticação | Início na ignição ou abertura da porta |
-| Captura de imagem/vídeo | Câmera MIPI CSI ou USB 1080p com iluminador IR |
+| Captura de imagem/vídeo | Raspberry Pi Camera Module V2 (8MP, 1080p) via interface CSI ou câmera USB com iluminador IR |
 | Localização | Módulo GNSS (GPS) via UART/USB |
 | Alertas | Envio via Telegram Bot, e-mail, SMS (Twilio) ou webhooks |
 | Base de dados | Embeddings locais criptografados (AES-GCM) |
