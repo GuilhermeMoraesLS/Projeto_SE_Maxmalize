@@ -1,16 +1,44 @@
 # Progressos no Protótipo de Reconhecimento Facial
-Este protótipo inicial de reconhecimento facial, desenvolvido com a biblioteca face_recognition e redes neurais convolucionais (CNNs), marca a primeira fase do nosso projeto. O objetivo principal foi criar uma base sólida para a identificação de pessoas em imagens estáticas, estabelecendo a viabilidade técnica da abordagem.
+
+Este protótipo inicial de reconhecimento facial, desenvolvido com as bibliotecas `face_recognition`, `OpenCV` e redes neurais convolucionais (CNNs), marca a primeira fase do nosso projeto. O objetivo principal foi criar uma base sólida para a identificação de pessoas em imagens estáticas, estabelecendo a viabilidade técnica da abordagem proposta pelo AutoGuard Vision.
 
 ## Melhorias e Customizações Aplicadas
-O código original foi adaptado com customizações estratégicas para otimizar o desempenho e a usabilidade. Os principais esforços foram:
 
-- Otimização de Velocidade: Implementamos um sistema de redimensionamento automático de imagens. Antes de processar uma imagem, o código a reduz para uma escala menor (scale=0.25), o que acelera significativamente a detecção e o reconhecimento, sem perder a precisão ao retornar as coordenadas originais do rosto.
+O código original foi aprimorado com customizações estratégicas para otimizar desempenho, precisão e usabilidade:
 
-- Estrutura Modular: O código foi dividido em funções claras e distintas. A função load_face_database() é responsável por carregar os encodings faciais, enquanto recognize_faces_in_image() lida com todo o processo de reconhecimento. Essa modularidade torna o código mais fácil de ler, modificar e expandir para futuras funcionalidades.
+- **Modelo CNN:** Substituímos o método HOG padrão pelo modelo CNN em todo o pipeline, aumentando substancialmente a precisão de detecção através de aprendizado profundo para identificar características faciais complexas.
 
-- Gerenciamento de Dados Simplificado: Adicionamos uma rotina para criar e gerenciar um banco de dados de rostos conhecidos na pasta database. Basta arrastar e soltar as imagens de referência, e o script faz o resto, associando cada rosto ao nome do arquivo.
+- **Pré-processamento com OpenCV:** A função `preprocess_image()` utiliza OpenCV para aplicar equalização de histograma, corrigindo automaticamente iluminação e contraste para funcionamento consistente em diferentes condições de captura.
 
-- Resultados Claros e Visuais: O protótipo não apenas identifica os rostos, mas também gera um resultado visual. Ele desenha retângulos de detecção e rótulos com nomes diretamente na imagem, que é então salva como resultado.jpg. Isso facilita a visualização e a validação do desempenho do sistema.
+- **Otimização de Velocidade:** Sistema de redimensionamento automático (`scale=0.5`) implementado com `cv2.resize()` acelera o processamento preservando detalhes importantes e retornando coordenadas originais para visualização em alta resolução.
 
-##Próximos Passos
-Com a base do reconhecimento em imagens estáticas consolidada, a próxima fase do projeto será focar na transição para o reconhecimento em tempo real dentro de um ambiente veicular. Nosso objetivo é adaptar o sistema para processar fluxos de vídeo ao vivo, garantindo que ele funcione de forma robusta e eficiente sob condições de iluminação e movimento do mundo real.
+- **Detecção e Recorte Automático:** Integração do Haar Cascade Classifier do OpenCV (`haarcascade_frontalface_default.xml`) para auto-crop inteligente, detectando e recortando automaticamente rostos pequenos em imagens grandes, otimizando o processamento.
+
+- **Comparação Aprimorada:** Algoritmo utiliza média ponderada das distâncias euclidianas entre encodings faciais, com tolerância calibrada em `0.5`, reduzindo falsos negativos e oferecendo equilíbrio ideal entre segurança e usabilidade.
+
+- **Estrutura Modular:** Código dividido em funções claras (`load_face_database()` e `recognize_faces_in_image()`), facilitando manutenção e expansão para futuras funcionalidades.
+
+- **Gerenciamento Simplificado:** Rotina automatizada cria e gerencia banco de dados na pasta `database`, aceitando múltiplos formatos e associando encodings aos nomes dos arquivos.
+
+- **Renderização Visual com OpenCV:** OpenCV é utilizado para desenhar retângulos delimitadores coloridos (`cv2.rectangle()`) e rótulos de texto (`cv2.putText()`), com verde para autorizados e vermelho para não autorizados. Resultados são salvos sequencialmente, facilitando validação e documentação.
+
+- **Sistema de Teste Contínuo:** Loop interativo permite avaliar múltiplas imagens na mesma execução, mantendo estatísticas da sessão e proporcionando feedback imediato.
+
+## Limitações Identificadas
+
+**Restrições Angulares:** O sistema opera com 100% de precisão para rostos frontais e semi-frontais (até 45° de rotação). Rostos de perfil (>60°) não são detectados, pois a biblioteca dlib foi treinada apenas com rostos frontais e requer visibilidade de ambos os olhos para extração confiável de features.
+
+**Desempenho com Múltiplos Rostos:** Imagens com várias pessoas apresentam tempo de processamento elevado (20-30 segundos), devido ao processamento individual de cada rosto detectado pelo modelo CNN.
+
+## Próximos Passos
+
+Com a base do reconhecimento em imagens estáticas consolidada, a próxima fase focará na transição para reconhecimento em tempo real em ambiente veicular. Os trabalhos futuros incluem:
+
+- Implementação de detecção multi-angular com modelos avançados (ArcFace, InsightFace)
+- Integração com hardware embarcado (Raspberry Pi, câmera, GPS)
+- Sistema de notificações em tempo real (Telegram/SMS)
+- Otimização para processamento de múltiplos rostos
+- Testes em condições reais de iluminação e movimento
+- Desenvolvimento de interface de gerenciamento
+
+O objetivo é adaptar o sistema para processar fluxos de vídeo ao vivo, garantindo funcionamento robusto e eficiente sob condições do mundo real.
